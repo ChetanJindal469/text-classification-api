@@ -14,7 +14,9 @@ const envSchema = z.object({
 
   GEMINI_MODEL: z.string().trim().min(1),
 
-  GEMINI_TIMEOUT_MS: z.coerce.number().int().positive().default(15000),
+  GEMINI_TIMEOUT_MS: z.coerce.number().int().positive().default(30000),
+
+  GEMINI_ATTEMPT_TIMEOUT_MS: z.coerce.number().int().positive().default(10000),
 
   GEMINI_MAX_RETRIES: z.coerce.number().int().min(0).max(5).default(2),
 

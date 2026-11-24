@@ -34,10 +34,19 @@ export function errorHandler(
       error: {
         code: "VALIDATION_ERROR",
         message: "Request validation failed",
-        details: error.validation.map((item) => ({
-          field: item.instancePath,
-          message: item.message
-        }))
+        details: error.validation.map((item) => {
+          // Missing/extra properties are reported via params, not instancePath
+          const property =
+            item.params.missingProperty ?? item.params.additionalProperty;
+
+          return {
+            field:
+              typeof property === "string"
+                ? `${item.instancePath}/${property}`
+                : item.instancePath,
+            message: item.message
+          };
+        })
       },
       requestId: request.id
     };

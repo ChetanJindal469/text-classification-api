@@ -11,6 +11,13 @@ dist/
 .env.*
 !.env.example
 
+# Credentials
+*.pem
+*.key
+*.p12
+credentials*.json
+service-account*.json
+
 # Testing
 coverage/
 

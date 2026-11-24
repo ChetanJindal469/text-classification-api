@@ -35,6 +35,12 @@ export async function registerSwagger(app: FastifyInstance): Promise<void> {
       deepLinking: true
     },
 
-    staticCSP: true
+    staticCSP: true,
+
+    // Applies to the /docs routes only. The default docs CSP includes
+    // upgrade-insecure-requests, which makes browsers load the UI assets over
+    // HTTPS and leaves the page blank on plain-HTTP hosts other than localhost.
+    transformStaticCSP: (header) =>
+      header.replace(/\s*upgrade-insecure-requests;?/, "")
   });
 }

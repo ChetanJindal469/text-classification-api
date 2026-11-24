@@ -1,0 +1,560 @@
+{
+  "info": {
+    "name": "AI Text Classification API",
+    "description": "Requests for POST /api/v1/classify. Start the server with `npm run dev` and keep `baseUrl` at http://localhost:4000, or change it to match your HOST and PORT.\n\nConfidence is a model-generated estimate, not a calibrated probability.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:4000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Classification",
+      "item": [
+        {
+          "name": "Complaint",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test('Response has a valid category and confidence', () => {",
+                  "  pm.expect(body.success).to.eql(true);",
+                  "  pm.expect(['Complaint', 'Query', 'Feedback', 'Other']).to.include(body.data.category);",
+                  "  pm.expect(body.data.confidence).to.be.within(0, 1);",
+                  "});",
+                  "pm.test('Category is Complaint (AI-dependent)', () => pm.expect(body.data.category).to.eql('Complaint'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"My order has not arrived and nobody is responding to my emails.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/classify",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "classify"]
+            },
+            "description": "Expected category: Complaint. The AI result can vary, so the category check is informational."
+          }
+        },
+        {
+          "name": "Query",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test('Response has a valid category and confidence', () => {",
+                  "  pm.expect(body.success).to.eql(true);",
+                  "  pm.expect(['Complaint', 'Query', 'Feedback', 'Other']).to.include(body.data.category);",
+                  "  pm.expect(body.data.confidence).to.be.within(0, 1);",
+                  "});",
+                  "pm.test('Category is Query (AI-dependent)', () => pm.expect(body.data.category).to.eql('Query'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"What is your return policy for electronics?\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/classify",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "classify"]
+            },
+            "description": "Expected category: Query. The AI result can vary, so the category check is informational."
+          }
+        },
+        {
+          "name": "Feedback",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test('Response has a valid category and confidence', () => {",
+                  "  pm.expect(body.success).to.eql(true);",
+                  "  pm.expect(['Complaint', 'Query', 'Feedback', 'Other']).to.include(body.data.category);",
+                  "  pm.expect(body.data.confidence).to.be.within(0, 1);",
+                  "});",
+                  "pm.test('Category is Feedback (AI-dependent)', () => pm.expect(body.data.category).to.eql('Feedback'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Your customer support team was quick and very helpful.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/classify",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "classify"]
+            },
+            "description": "Expected category: Feedback. The AI result can vary, so the category check is informational."
+          }
+        },
+        {
+          "name": "Other",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test('Response has a valid category and confidence', () => {",
+                  "  pm.expect(body.success).to.eql(true);",
+                  "  pm.expect(['Complaint', 'Query', 'Feedback', 'Other']).to.include(body.data.category);",
+                  "  pm.expect(body.data.confidence).to.be.within(0, 1);",
+                  "});",
+                  "pm.test('Category is Other (AI-dependent)', () => pm.expect(body.data.category).to.eql('Other'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"The sky is blue today.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/classify",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "classify"]
+            },
+            "description": "Expected category: Other. The AI result can vary, so the category check is informational."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Validation errors",
+      "item": [
+        {
+          "name": "Missing text",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test('Error response shape', () => {",
+                  "  pm.expect(body.success).to.eql(false);",
+                  "  pm.expect(body.error.code).to.be.a('string');",
+                  "  pm.expect(body.requestId).to.be.a('string');",
+                  "});",
+                  "pm.test('Error code is VALIDATION_ERROR', () => pm.expect(body.error.code).to.eql('VALIDATION_ERROR'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/classify",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "classify"]
+            }
+          }
+        },
+        {
+          "name": "Empty text",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test('Error response shape', () => {",
+                  "  pm.expect(body.success).to.eql(false);",
+                  "  pm.expect(body.error.code).to.be.a('string');",
+                  "  pm.expect(body.requestId).to.be.a('string');",
+                  "});",
+                  "pm.test('Error code is VALIDATION_ERROR', () => pm.expect(body.error.code).to.eql('VALIDATION_ERROR'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/classify",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "classify"]
+            }
+          }
+        },
+        {
+          "name": "Whitespace-only text",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test('Error response shape', () => {",
+                  "  pm.expect(body.success).to.eql(false);",
+                  "  pm.expect(body.error.code).to.be.a('string');",
+                  "  pm.expect(body.requestId).to.be.a('string');",
+                  "});",
+                  "pm.test('Error code is VALIDATION_ERROR', () => pm.expect(body.error.code).to.eql('VALIDATION_ERROR'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"   \"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/classify",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "classify"]
+            }
+          }
+        },
+        {
+          "name": "Text is not a string",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test('Error response shape', () => {",
+                  "  pm.expect(body.success).to.eql(false);",
+                  "  pm.expect(body.error.code).to.be.a('string');",
+                  "  pm.expect(body.requestId).to.be.a('string');",
+                  "});",
+                  "pm.test('Error code is VALIDATION_ERROR', () => pm.expect(body.error.code).to.eql('VALIDATION_ERROR'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": 123\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/classify",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "classify"]
+            }
+          }
+        },
+        {
+          "name": "Unknown property",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test('Error response shape', () => {",
+                  "  pm.expect(body.success).to.eql(false);",
+                  "  pm.expect(body.error.code).to.be.a('string');",
+                  "  pm.expect(body.requestId).to.be.a('string');",
+                  "});",
+                  "pm.test('Error code is VALIDATION_ERROR', () => pm.expect(body.error.code).to.eql('VALIDATION_ERROR'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Hello\",\n  \"category\": \"Query\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/classify",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "classify"]
+            }
+          }
+        },
+        {
+          "name": "Malformed JSON",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', () => pm.response.to.have.status(400));",
+                  "const body = pm.response.json();",
+                  "pm.test('Error response shape', () => {",
+                  "  pm.expect(body.success).to.eql(false);",
+                  "  pm.expect(body.error.code).to.be.a('string');",
+                  "  pm.expect(body.requestId).to.be.a('string');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"text\": \"unterminated",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/classify",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "classify"]
+            }
+          }
+        },
+        {
+          "name": "Unsupported content type",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 415', () => pm.response.to.have.status(415));",
+                  "const body = pm.response.json();",
+                  "pm.test('Error response shape', () => {",
+                  "  pm.expect(body.success).to.eql(false);",
+                  "  pm.expect(body.error.code).to.be.a('string');",
+                  "  pm.expect(body.requestId).to.be.a('string');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "text=Hello"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/classify",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "classify"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Other",
+      "item": [
+        {
+          "name": "Unknown route",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', () => pm.response.to.have.status(404));",
+                  "pm.test('Error code is ROUTE_NOT_FOUND', () => pm.expect(pm.response.json().error.code).to.eql('ROUTE_NOT_FOUND'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/unknown",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "unknown"]
+            }
+          }
+        },
+        {
+          "name": "OpenAPI specification",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Documents POST /api/v1/classify', () => pm.expect(pm.response.json().paths['/api/v1/classify'].post).to.be.an('object'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/docs/json",
+              "host": ["{{baseUrl}}"],
+              "path": ["docs", "json"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
