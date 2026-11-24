@@ -20,7 +20,7 @@
   },
   "keywords": [],
   "author": "Chetan Jindal",
-  "license": "ISC",
+  "license": "MIT",
   "type": "module",
   "bugs": {
     "url": "https://bitbucket.org/Chetan_Jindal96/text-classification-api/issues"

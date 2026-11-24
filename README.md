@@ -1,5 +1,7 @@
 # AI Text Classification API
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 A REST API that classifies a piece of text as **Complaint**, **Query**, **Feedback** or **Other** using Google Gemini, and returns the category with a confidence score.
 
 Built with Node.js 24, Fastify 5, TypeScript (strict), Zod and the official `@google/genai` SDK.
@@ -16,6 +18,7 @@ Built with Node.js 24, Fastify 5, TypeScript (strict), Zod and the official `@go
 - [Postman collection](#postman-collection)
 - [Security](#security)
 - [Known limitations](#known-limitations)
+- [License](#license)
 
 ## Quick start
 
@@ -335,3 +338,9 @@ Import `postman/text-classification-api.postman_collection.json`. The `baseUrl` 
 - **No authentication or rate limiting** on this API. A public deployment would need both to protect the Gemini quota.
 - **Single-label output**: mixed-intent text such as "Great product, but where is my refund?" gets only the dominant category.
 - **Prompt injection** is mitigated (data/instruction separation and a constrained output schema) but can't be fully eliminated with LLMs.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+Copyright (c) 2026 Chetan Jindal
