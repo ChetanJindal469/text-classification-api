@@ -1,0 +1,51 @@
+{
+  "name": "text-classification-api",
+  "version": "1.0.0",
+  "description": "AI-assisted text classification API using Fastify and Gemini AI",
+  "main": "dist/server.js",
+  "scripts": {
+    "test": "vitest run",
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Chetan_Jindal96@bitbucket.org/Chetan_Jindal96/text-classification-api.git"
+  },
+  "keywords": [],
+  "author": "Chetan Jindal",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://bitbucket.org/Chetan_Jindal96/text-classification-api/issues"
+  },
+  "homepage": "https://bitbucket.org/Chetan_Jindal96/text-classification-api#readme",
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "@fastify/helmet": "^13.2.0",
+    "@fastify/swagger": "^9.9.5",
+    "@fastify/swagger-ui": "^5.2.6",
+    "@google/genai": "^3.6.1",
+    "dotenv": "^18.0.10",
+    "fastify": "^5.12.8",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.19.2",
+    "eslint": "^10.15.0",
+    "prettier": "^3.10.1",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.74.0",
+    "vitest": "^5.1.1"
+  },
+  "private": true
+}
